@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Islami</string>
+    <string name="quran">قرأن</string>
+    <string name="radio">راديو</string>
+    <string name="spha">سبحة</string>
+    <string name="hadeth">حديث</string>
+</resources>
