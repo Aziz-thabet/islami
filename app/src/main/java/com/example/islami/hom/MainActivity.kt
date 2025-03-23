@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import com.example.islami.R
 import com.example.islami.databinding.ActivityMainBinding
 import com.example.islami.hom.tabs.HadethFragment
-import com.example.islami.quran.QuranFragment
 import com.example.islami.hom.tabs.RadioFragment
 import com.example.islami.hom.tabs.sphaFragment
+import com.example.islami.quran.QuranFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.bottomNveView.setOnItemSelectedListener { menuItem ->
-            var fragment: Fragment = when (menuItem.itemId) {
+            val fragment: Fragment = when (menuItem.itemId) {
                 R.id.navigation_quran -> {
                     QuranFragment()
 
