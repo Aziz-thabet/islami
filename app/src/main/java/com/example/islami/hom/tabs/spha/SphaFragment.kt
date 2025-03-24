@@ -1,4 +1,4 @@
-package com.example.islami.hom.tabs
+package com.example.islami.hom.tabs.spha
 
 import android.os.Bundle
 import android.view.LayoutInflater

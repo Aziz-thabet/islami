@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.islami.R
 import com.example.islami.databinding.ActivityMainBinding
-import com.example.islami.hom.tabs.HadethFragment
-import com.example.islami.hom.tabs.RadioFragment
-import com.example.islami.hom.tabs.sphaFragment
-import com.example.islami.quran.QuranFragment
+import com.example.islami.hom.tabs.hadeth.HadethFragment
+import com.example.islami.hom.tabs.quran.QuranFragment
+import com.example.islami.hom.tabs.radio.RadioFragment
+import com.example.islami.hom.tabs.spha.sphaFragment
 
 class MainActivity : AppCompatActivity() {
 

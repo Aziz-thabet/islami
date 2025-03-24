@@ -1,4 +1,4 @@
-package com.example.islami.quran
+package com.example.islami.hom.tabs.quran
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.islami.databinding.FragmentQuranBinding
-import com.example.islami.hom.AppConstens
 
 class QuranFragment : Fragment() {
 

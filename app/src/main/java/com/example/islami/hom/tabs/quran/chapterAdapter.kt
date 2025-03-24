@@ -1,7 +1,6 @@
-package com.example.islami.quran
+package com.example.islami.hom.tabs.quran
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.islami.databinding.ItemChabterBinding
