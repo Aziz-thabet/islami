@@ -7,8 +7,8 @@ import com.example.islami.R
 import com.example.islami.databinding.ActivityMainBinding
 import com.example.islami.hom.tabs.HadethFragment
 import com.example.islami.hom.tabs.RadioFragment
+import com.example.islami.hom.tabs.quran.QuranFragment
 import com.example.islami.hom.tabs.sphaFragment
-import com.example.islami.quran.QuranFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Islami"
         tools:targetApi="31">
         <activity
+            android:name=".hom.tabs.chpterDetails.ChapterDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -20,7 +23,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".hom.MainActivity" />
     </application>
