@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.islami.databinding.FragmentQuranBinding
-import com.example.islami.hom.AppConstens
 import com.example.islami.hom.tabs.chpterDetails.ChapterDetailsActivity
 
 class QuranFragment : Fragment() {
