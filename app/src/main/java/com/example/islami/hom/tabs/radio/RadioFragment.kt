@@ -1,14 +1,12 @@
-package com.example.islami.hom.tabs
+package com.example.islami.hom.tabs.radio
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.islami.R
-import com.example.islami.databinding.FragmentHadethBinding
 import com.example.islami.databinding.FragmentRadioBinding
-import com.example.islami.hom.AppConstens
+import com.example.islami.hom.tabs.quran.AppConstens
 
 class RadioFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.example.islami.hom
+package com.example.islami.hom.tabs.quran
 
 import com.example.islami.model.Chapter
 
