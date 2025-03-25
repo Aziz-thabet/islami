@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.islami.databinding.ItemChabterBinding
-import com.example.islami.model.chapter
+import com.example.islami.model.Chapter
 
-class chapterAdapter(val chapters: List<chapter>) :
+class chapterAdapter(val chapters: List<Chapter>) :
     RecyclerView.Adapter<chapterAdapter.ViewHolder>() {
 
     class ViewHolder(val itemBinding: ItemChabterBinding) :
@@ -37,5 +37,17 @@ class chapterAdapter(val chapters: List<chapter>) :
         holder.itemBinding.versesNumberTv.text = chapter.versesNumber
         holder.itemBinding.chapterIndexTv.text = "${chapter.index + 1}"
 
+        onItemClick?.let { onClick ->
+            holder.itemView.setOnClickListener {
+                onClick.onItemClick(position, chapter)
+            }
+        }
+
+    }
+
+    var onItemClick: OnItemClick? = null
+
+    fun interface OnItemClick {
+        fun onItemClick(position: Int, chapter: Chapter)
     }
 }
