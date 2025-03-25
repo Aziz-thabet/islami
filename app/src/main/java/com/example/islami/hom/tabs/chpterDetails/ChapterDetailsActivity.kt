@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.islami.R
 import com.example.islami.databinding.ActivityChapterDetailsBinding
-import com.example.islami.hom.AppConstens
+import com.example.islami.hom.tabs.quran.AppConstens
 import com.example.islami.model.Chapter
 
 class ChapterDetailsActivity : AppCompatActivity() {
