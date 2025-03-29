@@ -14,18 +14,19 @@ import com.google.android.material.carousel.FullScreenCarouselStrategy
 
 
 class HadethFragment : Fragment() {
-    lateinit var viewBinding: FragmentHadethBinding
+    private lateinit var viewBinding: FragmentHadethBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewBinding = FragmentHadethBinding.inflate(inflater, container, false)
         return viewBinding.root
     }
-    val hadeethList: MutableList<Hadeeth> = mutableListOf()
-    lateinit var adapter: HadethCarouselAdapter
-    lateinit var layoutManager: CarouselLayoutManager
+
+    private val hadeethList: MutableList<Hadeeth> = mutableListOf()
+    private lateinit var adapter: HadethCarouselAdapter
+    private lateinit var layoutManager: CarouselLayoutManager
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +54,7 @@ class HadethFragment : Fragment() {
         )
     }
 
-    fun readAhadeethFile() {
+    private fun readAhadeethFile() {
         val fileContent =
             activity?.assets?.open("hadeeth/hadeeth.txt")?.bufferedReader().use { it?.readText() }
         if (fileContent == null) return
@@ -68,7 +69,7 @@ class HadethFragment : Fragment() {
 
     }
 
-    fun getMarginInPx(): Int {
+    private fun getMarginInPx(): Int {
         val r = resources
         val px = Math.round(
             TypedValue.applyDimension(
