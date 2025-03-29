@@ -10,12 +10,12 @@ import com.example.islami.hom.tabs.quran.AppConstens
 
 class RadioFragment : Fragment() {
 
-    lateinit var viewBinding: FragmentRadioBinding
+    private lateinit var viewBinding: FragmentRadioBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewBinding = FragmentRadioBinding.inflate(inflater, container, false)
         return viewBinding.root
     }
