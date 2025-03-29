@@ -4,6 +4,7 @@
     <string name="radio">راديو</string>
     <string name="spha">سبحة</string>
     <string name="hadeth">حديث</string>
+    <string name="islamiicon">islamiIcon</string>
     <array name="azkarList">
         <item>سبحان الله</item>
         <item>الحمد لله</item>

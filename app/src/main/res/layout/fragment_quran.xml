@@ -9,6 +9,7 @@
         android:id="@+id/islami_icon"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:contentDescription="@string/islamiicon"
         android:src="@drawable/islami_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.12"
