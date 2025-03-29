@@ -12,17 +12,17 @@ import com.example.islami.hom.tabs.chpterDetails.ChapterDetailsActivity
 class QuranFragment : Fragment() {
 
 
-    lateinit var viewBinding: FragmentQuranBinding
+    private lateinit var viewBinding: FragmentQuranBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewBinding = FragmentQuranBinding.inflate(inflater, container, false)
         return viewBinding.root
     }
 
-    lateinit var adapter: chapterAdapter
+    private lateinit var adapter: chapterAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = chapterAdapter(chapters)
@@ -34,5 +34,5 @@ class QuranFragment : Fragment() {
         viewBinding.chapterRecV.adapter = adapter
     }
 
-    val chapters = AppConstens.getChapters()
+    private val chapters = AppConstens.getChapters()
 }
