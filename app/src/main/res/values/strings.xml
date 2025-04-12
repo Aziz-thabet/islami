@@ -5,6 +5,8 @@
     <string name="spha">سبحة</string>
     <string name="hadeth">حديث</string>
     <string name="islamiicon">islamiIcon</string>
+    <string name="channel_name">radio channel</string>
+    <string name="channel_description">readio notifications</string>
     <array name="azkarList">
         <item>سبحان الله</item>
         <item>الحمد لله</item>
