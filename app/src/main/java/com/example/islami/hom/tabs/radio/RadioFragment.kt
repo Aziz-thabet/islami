@@ -7,19 +7,23 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.islami.R
 import com.example.islami.databinding.FragmentRadioBinding
+import com.example.islami.hom.tabs.radio.ApiClient
 import com.example.islami.hom.tabs.radio.OnPlayClick
 import com.example.islami.hom.tabs.radio.Radio
 import com.example.islami.hom.tabs.radio.RadioService
+import kotlinx.coroutines.launch
 
 
 class RadioFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentRadioBinding
     var radioService: RadioService? = null
-    lateinit var radioList: List<Radio>
+    private var radioList: List<Radio> = emptyList()
     var currentRadioIndex = 0
     var bound = false
     override fun onCreateView(
@@ -33,8 +37,7 @@ class RadioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getRadioList()
-        initViews()
+        getRadioListFromApi()
         onPlayClick()
         onPreviousClick()
         onNextClick()
@@ -43,38 +46,49 @@ class RadioFragment : Fragment() {
 
     private fun onNextClick() {
         viewBinding.nextIv.setOnClickListener {
+            showLoading() // ✅ اظهار اللودينج
             pauseMediaPlayer()
             viewBinding.playIv.setImageResource(R.drawable.play)
-            currentRadioIndex = if (currentRadioIndex == radioList.size - 1) {
-                0
-            } else {
-                ++currentRadioIndex
+
+            currentRadioIndex =
+                if (currentRadioIndex == radioList.size - 1) 0 else currentRadioIndex + 1
+            val nextRadio = radioList[currentRadioIndex]
+
+            viewBinding.auther.text = nextRadio.name
+
+            radioService?.initMediaPlayer(nextRadio.url, nextRadio.name)
+
+            // ✅ نشغل الراديو مباشرة لما يتحضر
+            radioService?.mediaPlayer?.setOnPreparedListener {
+                hideLoading() // ✅ نخفي اللودينج
+                radioService?.StartMediaPlayer()
+                viewBinding.playIv.setImageResource(R.drawable.pause)
             }
-            radioService?.initMediaPlayer(
-                radioList[currentRadioIndex].url,
-                radioList[currentRadioIndex].name
-            )
-            viewBinding.auther.text = radioList[currentRadioIndex].name
         }
     }
+
 
     private fun onPreviousClick() {
         viewBinding.previousIv.setOnClickListener {
+            showLoading()
             pauseMediaPlayer()
             viewBinding.playIv.setImageResource(R.drawable.play)
-            currentRadioIndex = if (currentRadioIndex == 0) {
-                radioList.size - 1
-            } else {
-                --currentRadioIndex
-            }
-            radioService?.initMediaPlayer(
-                radioList[currentRadioIndex].url,
-                radioList[currentRadioIndex].name
-            )
-            viewBinding.auther.text = radioList[currentRadioIndex].name
-        }
 
+            currentRadioIndex =
+                if (currentRadioIndex == 0) radioList.size - 1 else currentRadioIndex - 1
+            val previousRadio = radioList[currentRadioIndex]
+
+            viewBinding.auther.text = previousRadio.name
+            radioService?.initMediaPlayer(previousRadio.url, previousRadio.name)
+
+            radioService?.mediaPlayer?.setOnPreparedListener {
+                hideLoading()
+                radioService?.StartMediaPlayer()
+                viewBinding.playIv.setImageResource(R.drawable.pause)
+            }
+        }
     }
+
 
     private fun onPlayClick() {
         viewBinding.playIv.setOnClickListener {
@@ -104,22 +118,6 @@ class RadioFragment : Fragment() {
             radioList[currentRadioIndex].name
         )
     }
-
-    private fun getRadioList() {
-        radioList = listOf(
-            Radio("إبراهيم الأخضر", "https://backup.qurango.net/radio/ibrahim_alakdar"),
-            Radio(
-                "شيخ أبو بكر الشاطري",
-                "https://backup.qurango.net/radio/shaik_abu_bakr_al_shatri"
-            ),
-            Radio("أحمد بن علي العجمي", "https://backup.qurango.net/radio/ahmad_alajmy"),
-            Radio("أحمد الحواشي", "https://backup.qurango.net/radio/ahmad_alhawashi"),
-            Radio("أحمد صابر", "https://backup.qurango.net/radio/ahmad_saber"),
-            Radio("أحمد نعينع", "https://backup.qurango.net/radio/ahmad_nauina"),
-            Radio("أكرم العلاقمي", "https://backup.qurango.net/radio/akram_alalaqmi"),
-        )
-    }
-
     override fun onStart() {
         super.onStart()
         bindService()
@@ -157,10 +155,37 @@ class RadioFragment : Fragment() {
         }
 
     }
-
     override fun onStop() {
         super.onStop()
         requireActivity().unbindService(connection)
     }
+    private fun getRadioListFromApi() {
+        lifecycleScope.launch {
+            try {
+                val response = ApiClient.retrofit.getRadioList()
+                radioList = response.radios
+                currentRadioIndex = 0
+                initViews()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(
+                    requireContext(),
+                    "فشل في جلب البيانات: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
+    private fun showLoading() {
+        viewBinding.progressBar.visibility = View.VISIBLE
+        viewBinding.playIv.visibility = View.INVISIBLE
+    }
+
+    private fun hideLoading() {
+        viewBinding.progressBar.visibility = View.GONE
+        viewBinding.playIv.visibility = View.VISIBLE
+    }
+
 
 }
